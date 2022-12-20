@@ -25,3 +25,14 @@
     }
 }
 .text-right {text-align: right;}
+
+.mt-50 {margin-top: 50px;}
+.board-form {
+
+    .form-search {
+        display: flex;
+        justify-content: space-between;
+        .btn-info {width: 100px;margin-left: 10px;}
+    }
+    
+}

@@ -31,7 +31,7 @@
             >
           </li>
           <li class="nav-item dropdown">
-            <RouterLink class="nav-link" active-class="active" to="/"
+            <RouterLink class="nav-link" active-class="active" to="/nested"
               >My Work</RouterLink
             >
           </li>

@@ -20,6 +20,8 @@
   </swiper>
 </template>
 <script setup>
+import getPopularMovies from '@/api/getPopularMovies';
+const { popularMovies, loading, loadPopularMovies } = getPopularMovies();
 // // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
 // // Import Swiper styles
