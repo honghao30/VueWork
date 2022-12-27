@@ -1,31 +1,66 @@
-<template>
-  <swiper
-    :slides-per-view="1"
-    :space-between="0"
-    @swiper="onSwiper"
-    @slideChange="onSlideChange"
-    :modules="[Navigation]"
-    navigation
-  >
-    <swiper-slide>
-      <img
-        src="https://cdn.pixabay.com/photo/2019/09/30/19/20/caravansary-4516601_960_720.jpg"
-      />
-    </swiper-slide>
-    <swiper-slide>
-      <img
-        src="https://cdn.pixabay.com/photo/2022/09/14/01/12/portrait-7453154_960_720.jpg"
-      />
-    </swiper-slide>
-  </swiper>
-</template>
-<script setup>
-import getPopularMovies from '@/api/getPopularMovies';
-const { popularMovies, loading, loadPopularMovies } = getPopularMovies();
-// // Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from 'swiper/vue';
-// // Import Swiper styles
-import 'swiper/css';
+<script>
+import getPopularMovies from '@/api/getMovie';
+import MovieCard from '../movie/MovieCard.vue';
+import { onMounted } from 'vue';
 
-import { Navigation } from 'swiper';
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Navigation, Pagination } from 'swiper';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+export default {
+  components: { MovieCard, Swiper, SwiperSlide },
+  setup() {
+    const { popularMovies, loadPopularMovies } = getPopularMovies();
+    const onSwiper = swiper => {
+      console.log(swiper);
+    };
+    const onSlideChange = () => {
+      console.log('slide change');
+    };
+    onMounted(() => {
+      loadPopularMovies();
+      //loadGenres();
+    });
+    return {
+      popularMovies,
+      onSwiper,
+      onSlideChange,
+      modules: [Navigation, Pagination],
+    };
+  },
+};
 </script>
+
+<template>
+  <div>
+    <swiper
+      :modules="modules"
+      :slides-per-view="1"
+      :space-between="0"
+      navigation
+      :pagination="{ clickable: true }"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
+    >
+      <swiper-slide
+        v-for="(popularMovie, index) in popularMovies"
+        :key="`${popularMovie.id}-${index}`"
+      >
+        <MovieCard :movie="popularMovie" />
+      </swiper-slide>
+    </swiper>
+    <!-- <div
+      class="mt-3"
+      v-for="popularMovie in popularMovies"
+      :key="popularMovie.id"
+    >
+      <MovieCard :movie="popularMovie" />
+    </div> -->
+  </div>
+</template>
+
+<style></style>
