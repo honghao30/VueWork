@@ -30,11 +30,7 @@
               >날씨 정보</RouterLink
             >
           </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" active-class="active" to="/post"
-              >게시글</RouterLink
-            >
-          </li>
+
           <li class="nav-item dropdown">
             <RouterLink class="nav-link" active-class="active" to="/nested"
               >My Work</RouterLink
