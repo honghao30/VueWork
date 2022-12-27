@@ -27,7 +27,7 @@ export default {
     position: absolute;
     max-width: 50%;
     left: 50px;
-    top: 10%;
+    bottom: 10%;
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     padding: 50px;

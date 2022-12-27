@@ -5,39 +5,20 @@
       <h2>게시글 수정</h2>
     </div>
     <div class="page__content">
-      <form v-on:submit.prevent="edit">
-        <div class="board__view">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
-              >제목</label
-            >
-            <input
-              v-model="form.title"
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput1"
-              placeholder="제목을 입력하세요"
-            />
+      <PostForm
+        v-model:title="form.title"
+        v-model:content="form.content"
+        @submit.prevent="edit"
+      >
+        <template #actions>
+          <div class="botttom__btn--wrap text-right">
+            <button type="button" class="btn btn-secondary" @click="goList">
+              목록
+            </button>
+            <button class="btn btn-dark">수정</button>
           </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label"
-              >내용</label
-            >
-            <textarea
-              v-model="form.content"
-              class="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-            ></textarea>
-          </div>
-        </div>
-        <div class="botttom__btn--wrap text-right">
-          <button type="button" class="btn btn-secondary" @click="goList">
-            목록
-          </button>
-          <button class="btn btn-dark">수정</button>
-        </div>
-      </form>
+        </template>
+      </PostForm>
     </div>
   </div>
 </template>
@@ -46,6 +27,7 @@
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getPostById, updatePost } from '@/api/posts';
+import PostForm from '@/components/posts/PostForm.vue';
 
 const route = useRoute();
 const router = useRouter();

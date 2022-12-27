@@ -1,10 +1,10 @@
 <template>
-  <h1>박스 오피스</h1>
+  <h1>{{ RangTit }}</h1>
   <div class="data">{{ RangeT }}</div>
 </template>
 <script>
 export default {
-  props: ['RangeT'],
+  props: ['RangeT', 'RangTit'],
   setup() {},
 };
 </script>

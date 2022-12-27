@@ -89,7 +89,7 @@ const fetch_weather = () => {
       sunsetTimeIs.value = sunsetTime;
       console.log(sunriseTime);
 
-      const Bgbase = `https://raw.githubusercontent.com/honghao30/withvue/vueone/public/`;
+      const Bgbase = `https://raw.githubusercontent.com/honghao30/VueWork/master/public/images/`;
       console.log('체크', ghours, Bgbase, morningHuous, morningHuous + 1);
       if (ghours == morningHuous) {
         let img1 = Bgbase + 'morning.jpg';
