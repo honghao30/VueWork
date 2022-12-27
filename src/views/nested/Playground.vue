@@ -1,4 +1,3 @@
-!
 <template>
   <div>
     <nav class="nav nav-pills nav-fill">

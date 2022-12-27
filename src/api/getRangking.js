@@ -29,7 +29,7 @@ const getMovieRaingking = () => {
         });
         Range.value.push(res.data.boxOfficeResult.showRange);
         RangkTitle.value.push(res.data.boxOfficeResult.boxofficeType);
-        console.log(Range);
+        console.log(res.data.boxOfficeResult.boxofficeType);
       })
       .catch(err => {
         console.log(err.message);
