@@ -1,6 +1,6 @@
 <template>
   <div class="movie-card">
-    <div class="movieInfo">
+    <div class="movieInfo" data-swiper-parallax="-200">
       <h2>{{ movie['title'] }}</h2>
       <div class="description">{{ movie['overview'] }}</div>
     </div>

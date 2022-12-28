@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <nav class="nav nav-pills nav-fill">
-      <RouterLink class="nav-link" :to="{ name: 'workOne', replace: true }">
+      <RouterLink class="nav-link" :activeClass="active" :to="{ name: 'workOne', replace: true }">
         점심메뉴
       </RouterLink>
-      <RouterLink class="nav-link" :to="{ name: 'workTwo', replace: true }">
+      <RouterLink class="nav-link" :activeClass="active" :to="{ name: 'workTwo', replace: true }">
         할일앱
       </RouterLink>
     </nav>

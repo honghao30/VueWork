@@ -5,7 +5,7 @@ import { onMounted } from 'vue';
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Navigation, Pagination } from 'swiper';
+import { Navigation, Pagination,Autoplay,Parallax } from 'swiper';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -29,7 +29,7 @@ export default {
       popularMovies,
       onSwiper,
       onSlideChange,
-      modules: [Navigation, Pagination],
+      modules: [Navigation, Pagination,Autoplay,Parallax],
     };
   },
 };
@@ -43,6 +43,12 @@ export default {
       :space-between="0"
       navigation
       :pagination="{ clickable: true }"
+      :autoplay="{
+        delay: 5000,
+        disableOnInteraction: false,
+      }"
+      :speed="1200"
+      :parallax="true"
       @swiper="onSwiper"
       @slideChange="onSlideChange"
     >
@@ -50,16 +56,9 @@ export default {
         v-for="(popularMovie, index) in popularMovies"
         :key="`${popularMovie.id}-${index}`"
       >
-        <MovieCard :movie="popularMovie" />
+        <MovieCard :movie="popularMovie"  />
       </swiper-slide>
     </swiper>
-    <!-- <div
-      class="mt-3"
-      v-for="popularMovie in popularMovies"
-      :key="popularMovie.id"
-    >
-      <MovieCard :movie="popularMovie" />
-    </div> -->
   </div>
 </template>
 

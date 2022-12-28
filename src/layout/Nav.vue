@@ -16,13 +16,8 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <RouterLink class="nav-link" active-class="active" to="/"
-              >Home</RouterLink
-            >
-          </li>
-          <li class="nav-item">
             <RouterLink class="nav-link" active-class="active" to="/about"
-              >With Vue</RouterLink
+              >About Me</RouterLink
             >
           </li>
           <li class="nav-item">
@@ -33,14 +28,10 @@
 
           <li class="nav-item dropdown">
             <RouterLink class="nav-link" active-class="active" to="/nested"
-              >My Work</RouterLink
+              >Vue UI</RouterLink
             >
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" />
-          <button class="btn btn-danger" type="submit">Search</button>
-        </form>
       </div>
     </div>
   </nav>
@@ -63,7 +54,12 @@
   justify-content: center;
 }
 .navbar-expand-lg .navbar-collapse {
-  flex-grow: 2;
+  //flex-grow: 2;
+  justify-content: flex-end;
+}
+.navbar-collapse {
+  flex-basis: auto;
+  flex-grow:0;
 }
 
 .navbar-expand-lg .navbar-nav {

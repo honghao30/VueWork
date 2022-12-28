@@ -1,17 +1,11 @@
 <template>
   <div>
-    홈
-
-    <div class="card" style="width: 18rem">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
+    <div class="alert alert-warning" role="alert">
+      Bootstrap, Vuetify 를 활용해 만들어본 작업 기록 페이지 입니다.
     </div>
+
+    <div>시작 페이지</div>
+    
   </div>
 </template>
 

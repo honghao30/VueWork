@@ -157,7 +157,7 @@ getDayOfWeek();
   position: relative;
   width: 100%;
   height: 100vh;
-  background-size: 100% auto;
+  background-size: 100% 100%;
   background-position: center bottom;
 }
 .weather__infor--wrap {
