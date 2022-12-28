@@ -1,9 +1,10 @@
 <script>
 import getTrailer from '@/api/getTrailer';
 import { onMounted } from 'vue';
+import TrailerCard from '../movie/TrailerCard.vue';
 
 export default {
-  //components: { },
+  components: { TrailerCard },
   setup() {
     const { trailers, loadTrailers } = getTrailer();
     
@@ -20,17 +21,38 @@ export default {
 </script>
 
 <template>
-  <div>
-      <ul
-      v-for="(traile, index) in trailers"
-      :key="`${traile.id}-${index}`"
-      >
-          <li :movie="popularMovie">
-            {{ movie['title'] }}
-            <!-- https://m.blog.naver.com/jcosmoss/221715332150 -->
-          </li>
+  <div class="trailer__section">
+    <div class="trailer__list--wrap">
+      <ul class="trailer__list">
+        <li       
+        v-for="(trailer, index) in trailers"
+        :key="`${trailer.id}-${index}`">
+          <TrailerCard
+          :trailer="trailer" />
+        </li>
+        <!-- https://stockant.tistory.com/560 -->
       </ul>
   </div>
+  </div>
+
 </template>
 
-<style></style>
+<style lang="scss">
+  .trailer__section {
+    width:100%;
+    overflow: hidden;
+  }
+  .trailer__list--wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom:100px;
+    .trailer__list {
+      display: flex;
+      gap: 20px;
+      li {
+      list-style:none;
+    }
+    }
+    
+  }
+</style>

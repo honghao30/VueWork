@@ -10,7 +10,7 @@ const getMovieVideos= () => {
         `https://api.themoviedb.org/3/movie/upcoming?api_key=d2bb40d5b45665c9a72ed5938162a943&language=ko-KR&page=1`,
       )      
       .then(res => {
-        console.log(res)
+        console.log(res.data.results)
         res.data.results.forEach(result => {
           trailers.value.push(result);
         });
