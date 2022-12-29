@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="button" class="btn-play" @click="$emit('modal')">
+    <button type="button" class="btn-play">
       <i class="bi bi-play-circle"></i>예고편 영상 보기
     </button>
     <div class="poster" v-bind:data-id="trailer.id">
@@ -12,25 +12,14 @@
     </div>
     <div class="release">개봉일 : {{ trailer['release_date'] }}</div>
     <div class="vote">평점 : {{ trailer['vote_average'] }}</div>
-    <TrailerModal :show="show" title="영화 예고편"></TrailerModal>
   </div>
 </template>
 <script setup>
 import { ref } from 'vue';
 import ImagePoster from './ImagePoster.vue';
-import TrailerModal from '../movie/TrailerModal.vue';
 defineProps({
   trailer: String,
 });
-defineEmits(['modal']);
-const show = ref(false);
-const openModal = () => {
-  show.value = true;
-};
-// export default {
-//   components: { ImagePoster },
-//   props: ['trailer'],
-// };
 </script>
 <style lang="scss" scoped>
 .modal-backdrop.show {

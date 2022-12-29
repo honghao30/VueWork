@@ -1,60 +1,62 @@
 <template>
-  <div v-if="true">
-    <!-- <div class="modal-backdrop fade"></div> -->
-    <!-- Modal -->
-    <div class="modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <slot name="headers">
-              <h1 class="modal-title fs-5">{{ title }}</h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </slot>
-          </div>
-          <div class="modal-body">
-            <slot></slot>
-            <!-- <iframe
-              width="100%"
-              height="315"
-              src="https://www.youtube.com/embed/kJnmT5BS4SA"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe> -->
-          </div>
-          <slot name="actions">
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </slot>
+  <Modal ref="baseModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">{{ title }}</h1>
+          <button type="button" class="btn-close" @click="cancel"></button>
+        </div>
+        <div class="modal-body">
+          <p v-for="text in content" :key="text">
+            {{ text }}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" @click="cancel">
+            Close
+          </button>
         </div>
       </div>
     </div>
-  </div>
+  </Modal>
 </template>
 
-<script setup>
-defineProps({
-  show: Boolean,
-  title: String,
-  id: Number,
-});
+<script>
+import Modal from '@/components/common/Modal.vue';
+import { ref } from 'vue';
+
+export default {
+  name: 'ConfirmationModal',
+  components: {
+    Modal,
+  },
+  props: {
+    title: String,
+    content: Array,
+  },
+  setup() {
+    const baseModal = ref(null);
+    const resolvePromise = ref(null);
+
+    const show = () => {
+      baseModal.value.open();
+      return new Promise((resolve, _) => {
+        resolvePromise.value = resolve;
+      });
+    };
+
+    const confirm = () => {
+      baseModal.value.close();
+      resolvePromise.value(true);
+    };
+
+    const cancel = () => {
+      baseModal.value.close();
+      resolvePromise.value(false);
+    };
+    return { baseModal, show, confirm, cancel };
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-.modal-backdrop.show {
-  opacity: 0 !important;
-}
-</style>
+<style></style>
