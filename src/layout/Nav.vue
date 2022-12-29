@@ -51,7 +51,7 @@
 .navbar-brand {
   flex-grow: 0.1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .navbar-expand-lg .navbar-collapse {
   //flex-grow: 2;
@@ -59,11 +59,34 @@
 }
 .navbar-collapse {
   flex-basis: auto;
-  flex-grow:0;
+  flex-grow: 0;
 }
 
 .navbar-expand-lg .navbar-nav {
   flex-direction: row;
   gap: 60px;
+}
+.navbar.sticky {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: 150ms;
+  box-shadow: 0px 15px 10px -15px #111;
+  background-color: #ccd6dd;
+  z-index: 10;
+}
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: 150ms;
+  box-shadow: 0px 15px 10px -15px #111;
+  background-color: #ccd6dd;
+  z-index: 10;
+}
+.header_off {
+  top: -100px;
 }
 </style>

@@ -23,7 +23,7 @@ const getMovieRaingking = () => {
         `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=ff4677c1cc97ed619e2bb12bb03f9be5&targetDt=${nowtime}`,
       )
       .then(res => {
-        console.log(res.data.boxOfficeResult);
+        console.log('영진위', res.data.boxOfficeResult);
         res.data.boxOfficeResult.dailyBoxOfficeList.forEach(result => {
           movieListRangk.value.push(result);
         });
