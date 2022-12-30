@@ -1,8 +1,5 @@
 <template>
   <div>
-    <button type="button" class="btn-play">
-      <i class="bi bi-play-circle"></i>예고편 영상 보기
-    </button>
     <div class="poster" v-bind:data-id="trailer.id">
       <ImagePoster :poster="trailer" />
     </div>
@@ -56,4 +53,8 @@ defineProps({
   font-size: 14px;
   margin: 1px 0;
 }
+.poster {
+  position: relative;
+}
+
 </style>

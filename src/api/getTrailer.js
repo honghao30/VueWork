@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 
 const getMovieVideos = () => {
-  const trailers = ref([]);
+  const trailers = ref([]);  
 
   const loadTrailers = async () => {
     axios
@@ -14,13 +14,13 @@ const getMovieVideos = () => {
         console.log(res.data.results);
         res.data.results.forEach(result => {
           trailers.value.push(result);
-        });
+        });       
       })
       .catch(err => {
         console.log(err.message);
-      });
+      });          
   };
-
+// https://m.blog.naver.com/jcosmoss/221715332150
   return { trailers, loadTrailers };
 };
 

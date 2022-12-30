@@ -7,6 +7,8 @@
           <button type="button" class="btn-close" @click="cancel"></button>
         </div>
         <div class="modal-body">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/M-sjJmIGClc?autoplay=1"></iframe>   
+          
           <p v-for="text in content" :key="text">
             {{ text }}
           </p>

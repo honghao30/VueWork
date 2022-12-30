@@ -6,27 +6,30 @@
           v-for="(trailer, index) in trailers"
           :key="`${trailer.id}-${index}`"
         >
-          <TrailerCard @click="handleClick" :trailer="trailer" />
+          <PlayBtn @click="handleClick" v-bind:data-id="trailer.id" />
+          <TrailerCard  :trailer="trailer" />
         </li>
         <!-- https://stockant.tistory.com/560 -->
       </ul>
     </div>
     <TrailerModal
       ref="modal"
-      :content="modalContent"
+      :content="modalContent"      
       title="영화 예고편"
     ></TrailerModal>
   </div>
 </template>
 <script>
 import { ref } from 'vue';
+import axios from 'axios';
 import getTrailer from '@/api/getTrailer';
 import { onMounted } from 'vue';
 import TrailerCard from '../movie/TrailerCard.vue';
 import TrailerModal from '../movie/TrailerModal.vue';
+import PlayBtn from '../movie/PlayBtn.vue';
 
 export default {
-  components: { TrailerCard, TrailerModal },
+  components: { TrailerCard, TrailerModal,PlayBtn },
   props: {
     title: {
       type: String,
@@ -40,7 +43,23 @@ export default {
       '배경에 결과가 출력되는 것을',
       '확인해보세요',
     ]);
-    const handleClick = async () => {
+    const youtubeId = ref([]);
+    const handleClick = async (e) => {
+      const _id = e.target.parentElement.getAttribute('data-id');
+      console.log(_id)      
+      axios
+      .get(
+        //`https://api.themoviedb.org/3/movie/upcoming?api_key=d2bb40d5b45665c9a72ed5938162a943&language=ko-KR&page=1`,
+        `https://api.themoviedb.org/3/movie/${_id}/videos?api_key=d2bb40d5b45665c9a72ed5938162a943`,
+      )
+      .then(res => {
+        console.log(res.data.results[0].key);
+        youtubeId.value.push(res.data.results[0].key)
+        console.log(youtubeId.value)
+      })
+      .catch(err => {
+        console.log(err.message);
+      });    
       const ok = await modal.value.show();
     };
     onMounted(() => {
@@ -53,6 +72,7 @@ export default {
       modal,
       modalContent,
       handleClick,
+      youtubeId,
     };
   },
 };
@@ -75,4 +95,17 @@ export default {
     }
   }
 }
+.trailer__list li {position: relative;}
+.btn-play {
+  position: absolute;
+  left:50%;
+  top:23vw;
+  transform: translateX(-50%);
+  color:#fff;
+  font-size: 60px;
+  background: none;
+  border: 0;
+  z-index: 10;
+}
+.ir-text {font-size:0}
 </style>
