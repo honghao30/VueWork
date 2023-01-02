@@ -15,6 +15,7 @@
     <TrailerModal
       ref="modal"
       :content="modalContent"      
+      :YoutubeVkeys="YoutubeVkeys"
       title="영화 예고편"
     ></TrailerModal>
   </div>
@@ -38,12 +39,15 @@ export default {
   setup() {
     const { trailers, loadTrailers } = getTrailer();
     const modal = ref(null);
-    const modalContent = ref([
-      '확인/취소를 누르고',
-      '배경에 결과가 출력되는 것을',
-      '확인해보세요',
-    ]);
+
+    // M-sjJmIGClc
     const youtubeId = ref([]);
+    let YoutubeVkey = youtubeId;
+    const YoutubeVkeys = ref([])
+    const modalContent = ref([
+      //`<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${YoutubeVkey}  +'?autoplay=1"></iframe>`
+      '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/'+  YoutubeVkey  +'?autoplay=1"></iframe>'        
+    ]);
     const handleClick = async (e) => {
       const _id = e.target.parentElement.getAttribute('data-id');
       console.log(_id)      
@@ -55,7 +59,11 @@ export default {
       .then(res => {
         console.log(res.data.results[0].key);
         youtubeId.value.push(res.data.results[0].key)
-        console.log(youtubeId.value)
+        YoutubeVkey = youtubeId.value[0]
+        document.querySelector('#youtubeVideo').innerHTML = `<iframe width="100%" height="300" src="https://www.youtube.com/embed/${YoutubeVkey}?autoplay=1"></iframe>`;        
+        YoutubeVkeys.value = youtubeId.value[0]
+        console.log('key',YoutubeVkey,YoutubeVkeys.value)
+        
       })
       .catch(err => {
         console.log(err.message);
@@ -71,6 +79,7 @@ export default {
       trailers,
       modal,
       modalContent,
+      YoutubeVkeys,
       handleClick,
       youtubeId,
     };
@@ -92,6 +101,7 @@ export default {
     gap: 20px;
     li {
       list-style: none;
+      position: relative;
     }
   }
 }
@@ -99,7 +109,7 @@ export default {
 .btn-play {
   position: absolute;
   left:50%;
-  top:23vw;
+  top: 30%;
   transform: translateX(-50%);
   color:#fff;
   font-size: 60px;

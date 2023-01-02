@@ -46,9 +46,15 @@ export default {
 
   .modal-container {
     background: white;
-    max-width: 320px;
+    max-width: 620px;
+    height:450px;
     width: 100%;
     padding: 1.5rem;
   }
+  .modal-body {
+    height:300px;
+    padding-bottom:20px;
+  }
+  .modal-footer {padding-top:20px !important}
 }
 </style>
