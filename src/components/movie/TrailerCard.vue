@@ -29,6 +29,10 @@ defineProps({
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  @media screen and (max-width: 768px) {
+    width: 200px;
+    height: 300px;
+  }
 }
 .trailer__list--wrap .trailer__list li .poster img {
   width: auto;
@@ -47,6 +51,11 @@ defineProps({
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  @media screen and (max-width: 768px) {
+    height: 3rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+  }
 }
 .release,
 .vote {
@@ -56,5 +65,4 @@ defineProps({
 .poster {
   position: relative;
 }
-
 </style>

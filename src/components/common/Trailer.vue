@@ -14,7 +14,8 @@
     </div>
     <TrailerModal
       ref="modal"
-      :content="modalContent"      
+      :content="modalContent"
+      :YoutubeVkeys="YoutubeVkeys"
       title="영화 예고편"
     ></TrailerModal>
   </div>
@@ -34,9 +35,6 @@ export default {
     title: {
       type: String,
     },
-    youtubeKey: {
-      type: String,
-    },
   },
   setup() {
     const { trailers, loadTrailers } = getTrailer();
@@ -45,28 +43,34 @@ export default {
     // M-sjJmIGClc
     const youtubeId = ref([]);
     let YoutubeVkey = youtubeId;
-    const YoutubeVkeys = ref([])
+    const YoutubeVkeys = ref([]);
     const modalContent = ref([
       //`<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${YoutubeVkey}  +'?autoplay=1"></iframe>`
-      '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/'+  YoutubeVkey  +'?autoplay=1"></iframe>'        
+      '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/' +
+        YoutubeVkey.value +
+        '?autoplay=1"></iframe>',
     ]);
-    const youtubeId = ref([]);
-    const handleClick = async (e) => {
+    const handleClick = async e => {
       const _id = e.target.parentElement.getAttribute('data-id');
       console.log(_id);
       axios
-      .get(
-        //`https://api.themoviedb.org/3/movie/upcoming?api_key=d2bb40d5b45665c9a72ed5938162a943&language=ko-KR&page=1`,
-        `https://api.themoviedb.org/3/movie/${_id}/videos?api_key=d2bb40d5b45665c9a72ed5938162a943`,
-      )
-      .then(res => {
-        console.log(res.data.results[0].key);
-        youtubeId.value.push(res.data.results[0].key)
-        console.log(youtubeId.value)
-      })
-      .catch(err => {
-        console.log(err.message);
-      });    
+        .get(
+          //`https://api.themoviedb.org/3/movie/upcoming?api_key=d2bb40d5b45665c9a72ed5938162a943&language=ko-KR&page=1`,
+          `https://api.themoviedb.org/3/movie/${_id}/videos?api_key=d2bb40d5b45665c9a72ed5938162a943`,
+        )
+        .then(res => {
+          console.log(res.data.results[0].key);
+          youtubeId.value.push(res.data.results[0].key);
+          YoutubeVkey.value = youtubeId.value[0];
+          document.querySelector(
+            '#youtubeVideo',
+          ).innerHTML = `<iframe width="100%" height="300" src="https://www.youtube.com/embed/${YoutubeVkey.value}?autoplay=1"></iframe>`;
+          YoutubeVkeys.value = youtubeId.value[0];
+          console.log('key', YoutubeVkey, YoutubeVkeys.value);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
       const ok = await modal.value.show();
     };
     onMounted(() => {
@@ -80,7 +84,7 @@ export default {
       modalContent,
       YoutubeVkeys,
       handleClick,
-      youtubeKey,
+      youtubeId,
     };
   },
 };
@@ -109,14 +113,17 @@ export default {
 }
 .btn-play {
   position: absolute;
-  left:50%;
-  top:23vw;
+  left: 50%;
+  top: 30%;
   transform: translateX(-50%);
   color: #fff;
   font-size: 60px;
   background: none;
   border: 0;
   z-index: 10;
+  @media screen and (max-width: 768px) {
+    top: 25%;
+  }
 }
 .ir-text {
   font-size: 0;

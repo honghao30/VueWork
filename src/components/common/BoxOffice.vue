@@ -48,13 +48,30 @@ export default {
 <style lang="scss" scoped>
 .movie__rakingbox {
   padding: 100px 50px;
+  @media screen and (max-width: 768px) {
+    padding: 50px 20px;
+  }
   h1 {
     text-align: center;
     font-size: 50px;
+    @media screen and (max-width: 768px) {
+      font-size: 25px;
+      padding-bottom: 5px !important;
+    }
   }
   .data {
     text-align: center;
     padding: 15px 0;
+    @media screen and (max-width: 768px) {
+      font-size: 15px;
+      padding: 5px 0;
+    }
+  }
+}
+
+.table > :not(caption) > * > * {
+  @media screen and (max-width: 768px) {
+    font-size: 13px;
   }
 }
 </style>
