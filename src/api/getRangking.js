@@ -14,9 +14,9 @@ const getMovieRaingking = () => {
         : new Date().getMonth() + 1;
     let date =
       new Date().getDate() < 10
-        ? '0' + new Date().getDate()
-        : new Date().getDate();
-    let nowtime = String(year) + String(month) + String(date - 1);
+        ? '0' + (new Date().getDate() - 1)
+        : new Date().getDate() - 1;
+    let nowtime = String(year) + String(month) + String(date);
     console.log(nowtime);
     axios
       .get(

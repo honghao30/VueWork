@@ -6,6 +6,7 @@
           <h1 class="modal-title fs-5">{{ title }}</h1>
           <button type="button" class="btn-close" @click="cancel"></button>
         </div>
+<<<<<<< HEAD
         <div class="modal-body">
           <iframe
             width="100%"
@@ -16,6 +17,14 @@
           <!-- <p v-for="youtube in kyeVal" :key="youtube">
             {{ youtube }}
           </p> -->
+=======
+        <div class="modal-body" v-bind:data-key="YoutubeVkeys">
+          <!-- <p id="keys" class="ir-text">{{ YoutubeVkeys }}</p>
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/"></iframe>    -->
+          <!-- <p v-html="content"></p> -->
+          <div id="youtubeVideo">
+          </div>
+>>>>>>> 019bf806a0b4350cbde10ebdcd96ec88ef163367
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" @click="cancel">
@@ -40,6 +49,8 @@ export default {
     title: String,
     kyeVal: String,
     content: Array,
+    YoutubeVkeys:String,
+    video: Object,
   },
   setup() {
     const baseModal = ref(null);
@@ -50,6 +61,7 @@ export default {
       return new Promise((resolve, _) => {
         resolvePromise.value = resolve;
       });
+
     };
 
     const confirm = () => {

@@ -14,8 +14,7 @@
     </div>
     <TrailerModal
       ref="modal"
-      :content="modalContent"
-      :kyeVal="youtubeKey"
+      :content="modalContent"      
       title="영화 예고편"
     ></TrailerModal>
   </div>
@@ -42,28 +41,32 @@ export default {
   setup() {
     const { trailers, loadTrailers } = getTrailer();
     const modal = ref(null);
+
+    // M-sjJmIGClc
+    const youtubeId = ref([]);
+    let YoutubeVkey = youtubeId;
+    const YoutubeVkeys = ref([])
     const modalContent = ref([
-      '확인/취소를 누르고',
-      '배경에 결과가 출력되는 것을',
-      '확인해보세요',
+      //`<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${YoutubeVkey}  +'?autoplay=1"></iframe>`
+      '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/'+  YoutubeVkey  +'?autoplay=1"></iframe>'        
     ]);
-    const youtubeKey = ref([]);
-    const handleClick = async e => {
+    const youtubeId = ref([]);
+    const handleClick = async (e) => {
       const _id = e.target.parentElement.getAttribute('data-id');
       console.log(_id);
       axios
-        .get(
-          //`https://api.themoviedb.org/3/movie/upcoming?api_key=d2bb40d5b45665c9a72ed5938162a943&language=ko-KR&page=1`,
-          `https://api.themoviedb.org/3/movie/${_id}/videos?api_key=d2bb40d5b45665c9a72ed5938162a943`,
-        )
-        .then(res => {
-          console.log('key', res.data.results[0].key);
-          youtubeKey.value.push(res.data.results[0].key);
-          console.log(youtubeKey.value);
-        })
-        .catch(err => {
-          console.log(err.message);
-        });
+      .get(
+        //`https://api.themoviedb.org/3/movie/upcoming?api_key=d2bb40d5b45665c9a72ed5938162a943&language=ko-KR&page=1`,
+        `https://api.themoviedb.org/3/movie/${_id}/videos?api_key=d2bb40d5b45665c9a72ed5938162a943`,
+      )
+      .then(res => {
+        console.log(res.data.results[0].key);
+        youtubeId.value.push(res.data.results[0].key)
+        console.log(youtubeId.value)
+      })
+      .catch(err => {
+        console.log(err.message);
+      });    
       const ok = await modal.value.show();
     };
     onMounted(() => {
@@ -75,6 +78,7 @@ export default {
       trailers,
       modal,
       modalContent,
+      YoutubeVkeys,
       handleClick,
       youtubeKey,
     };
@@ -96,6 +100,7 @@ export default {
     gap: 20px;
     li {
       list-style: none;
+      position: relative;
     }
   }
 }
@@ -104,8 +109,8 @@ export default {
 }
 .btn-play {
   position: absolute;
-  left: 50%;
-  top: 30%;
+  left:50%;
+  top:23vw;
   transform: translateX(-50%);
   color: #fff;
   font-size: 60px;
