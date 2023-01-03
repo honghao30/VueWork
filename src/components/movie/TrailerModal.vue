@@ -7,11 +7,15 @@
           <button type="button" class="btn-close" @click="cancel"></button>
         </div>
         <div class="modal-body">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/M-sjJmIGClc?autoplay=1"></iframe>   
-          
-          <p v-for="text in content" :key="text">
-            {{ text }}
-          </p>
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/M-sjJmIGClc?autoplay=1"
+          ></iframe>
+          {{ youtubeKey }}
+          <!-- <p v-for="youtube in kyeVal" :key="youtube">
+            {{ youtube }}
+          </p> -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" @click="cancel">
@@ -34,6 +38,7 @@ export default {
   },
   props: {
     title: String,
+    kyeVal: String,
     content: Array,
   },
   setup() {
